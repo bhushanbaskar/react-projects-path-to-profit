@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App | useState React</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container{
+            width: 100vw;
+            min-height: 100vh;
+            background-color: #171717;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        .action-btns{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #171717;
+            color: #f0f0f0;
+            font-size: 2rem;
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin: 10vw;
+        }
+        .action-btns:hover{
+            background-color: #f0f0f0;
+            color: #171717;
+            transform: scale(1.1);
+        }
+        .count-screen{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: transparent;
+            color: #f0f0f0;
+            font-size: 7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- react cdn -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const { useState } = React ;
+        function Counter() {
+            const [ count , setCount ] = React.useState(0);
+            return (
+                <div className="container">
+                    <button type="button" className="action-btns" onClick={() => setCount(count-1)}>-</button>
+                    <div className="count-screen">{count}</div>
+                    <button type="button" className="action-btns" onClick={() => setCount(count+1)}>+</button>
+                </div>
+            );
+        }
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<Counter />)
+
+    </script>
+</body>
+
+</html>

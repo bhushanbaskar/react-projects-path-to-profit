@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        JSX, Components | Profile Card React component</title>
+
+    <!-- React & ReactDOM (Official CDN) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel to compile JSX in browser -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Optional: Styling -->
+    <style>
+        body {
+            font-family: 'Arial','Segoe UI', sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 0 0 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            overflow: hidden;
+        }
+        .profile-banner {
+            height: 100px;
+            background-color: #0c88ed;
+            border: none;
+            
+        }
+        .profile-image{
+            width: 100px;
+            height: 100px;
+            border: 1.7px solid white;
+            border-radius: 50%;
+            margin-top: -50px;
+            background-size: cover;
+        }
+        .profile-name{
+            font-size: 1.5rem;
+            margin: 10px 0 5px;
+            color: #333;
+            
+        }
+        .profile-title{
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 7px;
+           line-height: 1;
+        }
+        .profile-bio{
+            font-size: 13px;
+            color: #555;
+            padding: 0 20px;
+            margin-bottom: 1rem;
+            padding: 10px 15px;
+            line-height: 1.4;
+        }
+        .social-links{
+            display: flex;
+            justify-content: center;
+            gap: 23px;
+        } 
+        .social-link{
+            color: #333;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        } 
+        .social-link:hover{
+            color: #0763ad;
+        } 
+
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <!-- Your React Code -->
+    <script type="text/babel">
+
+        // ✅ Start Coding Here
+        function App() {
+
+
+            return (
+                <div className="profile-card">
+                    <div className="profile-banner"></div>
+                    <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt="Profile" className="profile-image" />
+                    <h1 className="profile-name">John Grayson</h1>
+                    <p className="profile-title">Web Developer</p>
+                    <p className="profile-bio">I'm John Grayson, and I'm a recent college graduate with a Bachelor's Degree in Web Design. I'm seeking a full-time opportunity where I can employ my programming skills.</p>
+                    <div className="social-links">
+                        <a href="#" className="social-link"><i className="fa fa-facebook"></i></a>
+                        <a href="#" className="social-link"><i className="fa fa-twitter"></i></a>
+                        <a href="#" className="social-link"><i className="fa fa-instagram"></i></a>
+                        <a href="#" className="social-link"><i className="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+            );
+        }
+
+        // 🧠 Render App
+        const rootElement = document.getElementById("root");
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App />);
+
+    </script>
+</body>
+
+</html>

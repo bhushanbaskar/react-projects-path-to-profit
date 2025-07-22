@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling | Light ON/OFF togglet</title>
+    <style>
+        #root{
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            /* border: 1px solid black; */
+            padding: 20px;
+            border-radius: 20px;
+            width: 50vw;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+        .light{
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+        .light-on{
+            background: #fefa0f;
+            box-shadow: 0 0 20px #fefa0f;
+            border: none;
+        }  
+        .light-off{
+            background: #191919;
+        }
+        .toggle-btn{
+            max-width: 20%;
+            min-width: 100px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border: none;
+            background: #03ca21;
+            color: #fff;
+            padding: 8px 12px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        } 
+        .toggle-btn:hover{
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- react CDN  -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        
+        const App = () => {
+            const [isOn, setIsOn] = React.useState(false);
+            
+
+            return(
+                <div className="container">
+                    <h1> light on/off </h1>
+                    <div className={`light ${isOn ? "light-on" : "light-off"}`}></div>
+                    <button type="button" className="toggle-btn"  onClick={() => setIsOn(!isOn)}>{isOn ? " Turn OFF" : "Turn ON"}</button>
+                </div>
+            );
+        };
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
+
+
+
+
+

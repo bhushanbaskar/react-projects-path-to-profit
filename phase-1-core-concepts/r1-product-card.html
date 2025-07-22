@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product card | React props</title>
+    <!-- Load React and Babel from CDN -->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            max-width: 1200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            width: 250px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .sale-card{
+            box-sizing: border-box;
+            background-color: #171717;
+            color: white;
+            position: absolute;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transform: translateY(-10px);
+            font-size: small;
+        }
+        .description{
+            font-size: 14px;
+            color: #666;
+            margin: 8px 0 10px;
+        }
+        .price-rating{
+            display: flex;
+            justify-content: space-between;
+        }
+        .price{
+            font-weight: bold;
+            color: #333;
+        }
+        .rating{
+            color: #333;
+            background: #f0efef;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .add-btn{
+            margin: 15px 0 0;
+            width: 100%;
+            padding: 7px 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: #08b60b;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- babel -->
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function ProductCard({ product }) {
+            const { name, isOnSale, imgSrc, description, price, rating } = product;
+            return (
+                <div className="product-card">
+
+                    {isOnSale && <div className="sale-card"> SALE! </div>}
+
+                    <img src={imgSrc} alt={name} style={{
+                        width: '100%',
+                        height: '200px',
+                        objectFit: 'cover',
+                        borderRadius: '4px'
+                    }} />
+                    <h3 className="product-name">{name}</h3>
+                    <div className="description">{description}</div>
+                    <div className="price-rating">
+                        <span className="price">${price.toFixed(2)}</span>
+                        <span className="rating">{rating}★</span>
+                    </div>
+                    <button type="button" className="add-btn">Add to Cart</button>
+                </div>
+            )
+        }
+
+
+        //main component
+        function App() {
+            const products = [
+    {
+        id: 1,
+        name: "Stylish Sneakers",
+        isOnSale: true,
+        imgSrc: "https://plus.unsplash.com/premium_photo-1679513691474-73102089c117?q=80&w=1113&auto=format&fit=crop&ixlib=rb-4.1.0",
+        description: "Comfortable and stylish sneakers for everyday wear.",
+        price: 59.99,
+        rating: "4.5"
+    },
+    {
+        id: 2,
+        name: "Luxury Leather Bag",
+        isOnSale: false,
+        imgSrc: "https://images.unsplash.com/photo-1685945000359-a47f54cc06d2?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "Premium handcrafted leather bag with elegant finish.",
+        price: 149.99,
+        rating: "4.8"
+    },
+    {
+        id: 3,
+        name: "Smart Fitness Watch",
+        isOnSale: true,
+        imgSrc: "https://images.unsplash.com/photo-1690580135882-0f3fc89a161c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "Track your health and style with this modern smart watch.",
+        price: 199.99,
+        rating: "4.6"
+    },
+    {
+        id: 4,
+        name: "Noise-Cancelling Headphones",
+        isOnSale: false,
+        imgSrc: "https://plus.unsplash.com/premium_photo-1678099940967-73fe30680949?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "Crystal-clear sound and total peace in one premium package.",
+        price: 299.99,
+        rating: "4.9"
+    },
+    {
+        id: 5,
+        name: "Ergonomic Office Chair",
+        isOnSale: true,
+        imgSrc: "https://images.unsplash.com/photo-1748887522207-3a5a9097bc43?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "Work in comfort and style with this ergonomically designed chair.",
+        price: 189.99,
+        rating: "4.7"
+    },
+    {
+        id: 6,
+        name: "4K Ultra HD Monitor",
+        isOnSale: false,
+        imgSrc: "https://plus.unsplash.com/premium_photo-1724092241795-3d3c7ce5b25a?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fDRLJTIwVWx0cmElMjBIRCUyME1vbml0b3J8ZW58MHx8MHx8fDA%3D",
+        description: "Stunning visuals with vibrant colors for creative professionals.",
+        price: 399.99,
+        rating: "4.8"
+    },
+    {
+        id: 7,
+        name: "Handcrafted Wooden Watch",
+        isOnSale: true,
+        imgSrc: "https://images.unsplash.com/photo-1678271248942-6a0deb6aa0b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "A minimalist, eco-friendly wooden timepiece for modern elegance.",
+        price: 129.99,
+        rating: "4.4"
+    },
+    {
+        id: 8,
+        name: "Luxury Scented Candles",
+        isOnSale: false,
+        imgSrc: "https://images.unsplash.com/photo-1618324395109-82adcad01043?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        description: "Fill your home with warmth and calming aromas.",
+        price: 49.99,
+        rating: "4.6"
+    }
+];
+;
+
+            return (
+                <div>
+                    <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Product Cards</h1>
+                    <div className="container">
+                        {products.map(product => {
+                            return (
+                                <ProductCard key={product.id} product={product} />
+                            )
+
+                        })}
+                    </div>
+                </div>
+            );
+
+        }
+
+        //rendering the main component
+        ReactDOM.render(<App />, document.getElementById('root'));
+        ;
+
+
+    </script>
+</body>
+
+</html>
