@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bhushan’s React Project Vault</title>
+  <style>
+  <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f8;
+    margin: 0;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    color: #222;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .vault-project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 10px;
+  }
+
+  .vault-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+  }
+
+  .vault-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .vault-card h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 16px;
+  }
+
+  .vault-card button,
+  .vault-card a {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .vault-card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .vault-card button:hover {
+    background-color: #0056b3;
+  }
+
+  .vault-card a {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .vault-card a:hover {
+    background-color: #1e7e34;
+  }
+
+  .vault-preview-container {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .vault-preview-container h2 {
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 16px;
+  }
+
+  .vault-preview-iframe {
+    width: 100%;
+    height: 520px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.8rem;
+    }
+
+    .vault-card h3 {
+      font-size: 1.1rem;
+    }
+
+    .vault-card button,
+    .vault-card a {
+      font-size: 0.85rem;
+      padding: 6px 10px;
+    }
+
+    .vault-preview-iframe {
+      height: 400px;
+    }
+  }
+</style>
+
+</head>
+<body class="vault-body">
+  <h1 class="vault-title">🚀 Bhushan’s React Projects Vault</h1>
+  <p>Click 🔍 Preview to load project below. Explore, learn, and build relentlessly 💡</p>
+
+  <div id="root"></div>
+
+  <!-- React & Babel -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const ProjectCard = ({ project, onPreview }) => (
+      <div className="vault-card">
+        <h3>{project.number}. {project.title}</h3>
+        <button onClick={() => onPreview(project)}>🔍 Preview</button>
+        <a href={project.demoLink} target="_blank">🌐 Open Full</a>
+        <a href={project.codeLink} target="_blank">💻 Source Code</a>
+      </div>
+    );
+
+    const App = () => {
+      const [selectedProject, setSelectedProject] = useState(null);
+
+      const projects = [
+        {
+          number: "R0",
+          title: "Profile Card",
+          demoLink: "/phase-1-core-concepts/R0-profile-card.html",
+          codeLink: "https://github.com/YOUR_USERNAME/react-projects-path-to-profit/tree/main/PHASE-1-Core-Concepts/R0-profile-card"
+        },
+        {
+          number: "R1",
+          title: "Product Card (Props Demo)",
+          demoLink: "/phase-1-core-concepts/r1-product-card.html",
+          codeLink: "https://github.com/YOUR_USERNAME/react-projects-path-to-profit/tree/main/PHASE-1-Core-Concepts/R1-product-card"
+        },
+        {
+          number: "R2",
+          title: "Counter (useState)",
+          demoLink: "/phase-1-core-concepts/R2-simple-counter.html",
+          codeLink: "https://github.com/YOUR_USERNAME/react-projects-path-to-profit/tree/main/PHASE-1-Core-Concepts/R2-simple-counter"
+        },
+        {
+          number: "R3",
+          title: "Light ON/OFF Toggle",
+          demoLink: "/phase-1-core-concepts/r3-light-onoff.html",
+          codeLink: "https://github.com/YOUR_USERNAME/react-projects-path-to-profit/tree/main/PHASE-1-Core-Concepts/R3-light-onoff"
+        }
+        // putyour projects here 
+      ];
+
+      return (
+        <div>
+          <div className="vault-project-list">
+            {projects.map((p, i) => (
+              <ProjectCard key={i} project={p} onPreview={setSelectedProject} />
+            ))}
+          </div>
+
+          {selectedProject && (
+            <div className="vault-preview-container">
+              <h2>🧪 Previewing: {selectedProject.title}</h2>
+              <iframe className="vault-preview-iframe" src={selectedProject.demoLink}></iframe>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+</html>
