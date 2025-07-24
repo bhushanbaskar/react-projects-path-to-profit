@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Login Form</title>
+
+    <!-- ✅ React and Babel CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- ✅ Simple Vanilla CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #root {
+            min-width: 100vw;
+            min-height: 100vh;
+            background: #232323;
+            color: rgb(250, 255, 240);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-div {
+            box-sizing: content-box;
+            padding: 10px;
+            min-width: 350px;
+            width: 60%;
+            max-width: 800px;
+            min-height: 50vh;
+            max-height: 850px;
+            /* border: 1px solid rgb(250, 255, 240); */
+            box-shadow: 0 0 15px rgba(250, 255, 240, 0.1);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .form-div form {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            /* border: 2px solid rgb(250, 255, 240); */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submitted-data {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .output {
+            margin-top: 15px;
+            background-color: #191919;
+            padding: 20px 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            width: 90%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        footer{
+            font-weight: 100;
+            color: #707070;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // 💡 Functional component for LoginForm
+        function LoginForm() {
+            const [email, setEmail] = React.useState('');
+            const [password, setPassword] = React.useState('');
+            const [submittedData, setSubmittedData] = React.useState(null);
+
+            //handeling onSubmit
+
+            const handelSubmit = (e) => {
+                e.preventDefault();
+
+                setSubmittedData({ email, password });
+                setEmail('');
+                setPassword('');
+            }
+
+            return (
+                <div className="form-div">
+                    <h2>Login Form</h2>
+                    <form onSubmit={handelSubmit}>
+                        <input type="email" name="email" className="email" placeholder="Enter Email Id" onChange={((e) => setEmail(e.target.value))} value={email} required />
+                        <input type="password" name="password" className="password" placeholder="Enter Password" onChange={((e) => setPassword(e.target.value))} value={password} required />
+                        <button type="submit">submit</button>
+                    </form>
+                    <div className="submitted-data">
+                        {submittedData && (
+                            <div class="output">
+                                <p class="data-item"><strong>Submitted Email :-</strong>{submittedData.email}</p>
+                                <p class="data-item"><strong>Submitted Password :-</strong>{submittedData.password}</p>
+                            </div>
+
+                        )}
+                    </div>
+                    <footer>&copy; 2025 bhushan baskar.</footer>
+                </div>
+            );
+
+        }
+
+        // 🔁 Render the LoginForm component inside the #root div
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<LoginForm />);
+    </script>
+</body>
+
+</html>
