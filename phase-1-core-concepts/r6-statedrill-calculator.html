@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React State Drill - Calculator</title>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 320px;
+    }
+
+    h3 {
+      margin-bottom: 1.2rem;
+      color: #333;
+    }
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin: 0.5rem;
+      width: 120px;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    .buttons {
+      margin-top: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin: 0.3rem;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 1rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #222;
+    }
+
+    footer {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    /* 👉 Default styles (for desktops & large tablets already covered) */
+
+/* 🔻 For small width devices like mobiles */
+@media (max-width: 330px) {
+  .calculator {
+    width: 100vw;
+    height: 100vh;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 80px;
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .result {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+
+  </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <!-- React CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- React App -->
+    <script type="text/babel">
+        const { useState } = React;
+        function InputFields({ num1, num2, setNum1, setNum2 }) {
+            //the problem with setNum1(e.target.value) is that if we use it then it will taken as a string not as a number i.e. 1+1 = 11
+            return (
+                <div>
+                    <input type="number" name="num1" value={num1} onChange={(e) => setNum1(Number(e.target.value))} placeholder="number 1" />
+                    <input type="number" name="num1" value={num2} onChange={(e) => setNum2(Number(e.target.value))} placeholder="number 2" />
+                </div>
+            );
+        }
+
+        function OperationButtons({ num1, num2, setResult }) {
+            const calculate = (op) => {
+                let res;
+                switch (op) {
+                    case '+': res = num1 + num2; break;
+                    case '-': res = num1 - num2; break;
+                    case '*': res = num1 * num2; break;
+                    case '/': res = num2 !== 0 ? (num1 / num2).toFixed(2) : "∞"; break;
+                    default: res = 0;
+                }
+                setResult(res);
+            }
+            return (
+                <div className="buttons">
+                    <button type="button" onClick={() => calculate('+')} >+</button>
+                    <button type="button" onClick={() => calculate('-')} >-</button>
+                    <button type="button" onClick={() => calculate('*')} >×</button>
+                    <button type="button" onClick={() => calculate('/')} >÷</button>
+                </div>
+            )
+        }
+        function Display({ result }) {
+            return <div className="result">result : {result}</div>;
+        }
+        function App() {
+
+            const [num1, setNum1] = useState(0);
+            const [num2, setNum2] = useState(0);
+            const [result, setResult] = useState(0);
+
+            return (
+                <div className="calculator">
+                    <h3> React State Drill - Calculator</h3>
+                    <InputFields num1={num1} num2={num2} setNum1={setNum1} setNum2={setNum2} />
+                    <OperationButtons num1={num1} num2={num2} setResult={setResult} />
+                    <Display result={result} />
+
+                    <footer>&copy; 2025 bhushan baskar.</footer>
+                </div>
+            );
+
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />)
+    </script>
+    <!-- github : 
+     project title: React State Drill - Calculator
+     project path : r6-statedrill-calculator.html  -->
+</body>
+
+</html>
