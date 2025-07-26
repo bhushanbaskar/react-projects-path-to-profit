@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Joke Fetcher</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f0f0f0;
+    }
+
+    .joke-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin: auto;
+      max-width: 600px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      background-color: rgb(251, 224, 189);
+      color: #232323;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- React App Code -->
+  <script type="text/babel">
+
+    const { useEffect, useState } = React;
+
+    function JokeFetcher() {
+      const [joke, setJoke] = useState('joke loading..');
+
+
+      function getNewJoke() {
+        setJoke('loading...')
+        fetch('https://official-joke-api.appspot.com/random_joke')
+          .then(res => res.json())
+          .then(data => setJoke(`${data.setup}🤭 ${data.punchline}`))
+          .catch(() => setJoke(`unable to load joke`));
+
+      }
+
+      useEffect(() => getNewJoke(), [])
+
+      return (
+        <div className="joke-box">
+          <h2>😂 Random Joke</h2>
+          <p className="joke">{joke}</p>
+          <button type="button" onClick={getNewJoke} >Another Joke</button>
+        </div >
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<><JokeFetcher /></>);
+  </script>
+</body>
+
+
+</html>
