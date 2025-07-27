@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Timer with useEffect Cleanup ⏱️</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            text-align: center;
+            
+        }
+        #root{
+            min-width: 100vw;
+            min-height: 100vh;
+            background: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(201, 201, 201);
+        }
+        button {
+            margin: 10px;
+            padding: 8px 20px;
+            font-size: 16px;
+            background: none;
+            color:rgb(201, 201, 201) ;
+            border: 0.3px solid rgba(201, 201, 201,0.5);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            
+            font-size: 80px;
+        }
+        h1 span{
+            font-size: 100px;
+        }
+        
+        footer{
+            margin-top: 18px;
+            color:#454545;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        function Timer() {
+            const [second, setSecond] = useState(0);
+            const [run, setRun] = useState(true);
+
+            useEffect(() => {
+                //for executing
+                if (!run) return;
+
+                // for if run is true
+                const timeIntervalId = setInterval(() => {
+                    setSecond(prev => prev + 1)
+                    console.log('timer started');
+                }, 1000);
+                
+                //CleanUp
+                return () => {
+                clearInterval(timeIntervalId);
+                console.log('cleared');
+            };
+
+            }, [run]);
+
+            //render
+            return(
+            <div>
+                <h3>Timer with useEffect Cleanup ⏱️</h3>
+          <h1><span>{second}</span>s</h1>
+          <button onClick={() => setRun(false)}>🛑 Stop</button>
+          <button onClick={() => setRun(true)}>▶️ Start</button>
+          <button onClick={() => setSecond(0)}>🔄 Reset</button>
+          <footer>&copy;2025 Bhushan Baskar</footer>
+        </div>
+            );
+            
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<Timer />);
+    </script>
+</body>
+
+</html>
